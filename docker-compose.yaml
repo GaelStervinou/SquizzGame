@@ -1,17 +1,25 @@
 version: '3.8'
 services:
-  app:
-    image: openai-demo-app
+  app-front:
     build:
-      context: ./
+      context: ./squizz-front
       target: dev
-      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./squizz-front:/app
       - /app/node_modules
       - /app/.next
     ports:
       - "3000:3000"
+  app-api:
+    build:
+      context: ./squizz-api
+    volumes:
+      - ./squizz-api:/app
+      - /app/node_modules
+    ports:
+      - "4001:4001"
+    depends_on:
+      - db
   db:
     image: postgres:12.2-alpine
     restart: always
