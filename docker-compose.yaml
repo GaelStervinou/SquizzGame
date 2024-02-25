@@ -14,7 +14,7 @@ services:
       - default
   app-api:
     build:
-      context: ./squizz-api
+      context: squizz-api3
     volumes:
       - ./squizz-api:/usr/src/app
       - /app/node_modules
